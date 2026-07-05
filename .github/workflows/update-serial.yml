@@ -1,0 +1,64 @@
+# Updates serial IDs in JSON files
+#
+# Triggered by:
+# push to main touching any .json file (skips its own commits)
+name: 🌦️ Update JSON Serial
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.json'
+
+concurrency:
+  group: Update-JSON-Serial
+  cancel-in-progress: true
+
+jobs:
+  update:
+    name: Update JSON Serial
+    if: ${{ !contains(github.event.head_commit.message, 'Update profiles') }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Get list of changed files
+        id: changed_files
+        run: |
+          CURRENT_SHA=${{ github.sha }}
+          PREVIOUS_SHA=$(git rev-parse $CURRENT_SHA^)
+          git diff --name-only $PREVIOUS_SHA $CURRENT_SHA > changed_files.txt
+          cat changed_files.txt
+
+      - name: Run update script
+        run: python .github/workflows/update-serial.py --changed-files-list changed_files.txt
+
+      - name: Commit and push changes
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+          rm changed_files.txt
+          git add .
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update profiles | ${{ github.event.head_commit.message }}
+            Co-authored-by: ${{ github.event.head_commit.author.name }} <${{ github.event.head_commit.author.email }}>"
+            git fetch origin ${{ github.ref_name }}
+            git rebase origin/${{ github.ref_name }}
+            git push origin HEAD:${{ github.ref_name }}
+          fi
