@@ -17,7 +17,10 @@ Uses only the Python standard library - no external dependencies required.
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
+
+SERIAL_KEY = "updateSerial"
 
 
 def load_changed_files(list_path: str) -> list[Path]:
@@ -29,7 +32,21 @@ def load_changed_files(list_path: str) -> list[Path]:
     return [Path(line.strip()) for line in lines if line.strip()]
 
 
-def bump_serial(file_path: Path) -> bool:
+def next_serial(old_serial: int, today: str) -> int:
+    """
+    vATIS-style serial format: YYYYMMDDNN (date + 2-digit sequence number).
+    Same day as the existing serial -> increment NN.
+    Different day (or unparsable) -> reset to today + 01.
+    """
+    old_str = str(old_serial)
+    if len(old_str) == 10:
+        old_date, old_seq = old_str[:8], old_str[8:]
+        if old_date == today:
+            return int(today + f"{int(old_seq) + 1:02d}")
+    return int(today + "01")
+
+
+def bump_serial(file_path: Path, today: str) -> bool:
     """Returns True if the file was modified."""
     if not file_path.exists() or file_path.suffix.lower() != ".json":
         return False
@@ -41,22 +58,22 @@ def bump_serial(file_path: Path) -> bool:
         print(f"  skip {file_path}: not valid JSON ({exc})")
         return False
 
-    if not isinstance(data, dict) or "serial" not in data:
-        print(f"  skip {file_path}: no top-level 'serial' key")
+    if not isinstance(data, dict) or SERIAL_KEY not in data:
+        print(f"  skip {file_path}: no top-level '{SERIAL_KEY}' key")
         return False
 
-    if not isinstance(data["serial"], int):
-        print(f"  skip {file_path}: 'serial' is not an integer")
+    if not isinstance(data[SERIAL_KEY], int):
+        print(f"  skip {file_path}: '{SERIAL_KEY}' is not an integer")
         return False
 
-    old_serial = data["serial"]
-    data["serial"] = old_serial + 1
+    old_serial = data[SERIAL_KEY]
+    data[SERIAL_KEY] = next_serial(old_serial, today)
 
     file_path.write_text(
         json.dumps(data, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
-    print(f"  updated {file_path}: serial {old_serial} -> {data['serial']}")
+    print(f"  updated {file_path}: {SERIAL_KEY} {old_serial} -> {data[SERIAL_KEY]}")
     return True
 
 
@@ -76,10 +93,12 @@ def main() -> int:
         print("No changed .json files to process.")
         return 0
 
+    today = datetime.now(timezone.utc).strftime("%Y%m%d")
+
     print(f"Processing {len(json_files)} changed JSON file(s):")
     any_updated = False
     for file_path in json_files:
-        if bump_serial(file_path):
+        if bump_serial(file_path, today):
             any_updated = True
 
     if not any_updated:
