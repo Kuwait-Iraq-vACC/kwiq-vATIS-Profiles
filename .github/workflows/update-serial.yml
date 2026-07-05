@@ -1,8 +1,4 @@
-# Updates serial IDs in JSON files
-#
-# Triggered by:
-# push to main touching any .json file (skips its own commits)
-name: 🌦️ Update JSON Serial
+name: Update JSON Serial
 
 on:
   push:
