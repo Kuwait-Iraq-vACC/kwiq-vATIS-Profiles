@@ -1948,7 +1948,6 @@
           }
         },
         "closingStatement": {
-          "autoIncludeClosingStatement": true,
           "autoIncludeClosingStatement": false,
           "template": {
             "text": "CONFIRM ATIS {letter}",
