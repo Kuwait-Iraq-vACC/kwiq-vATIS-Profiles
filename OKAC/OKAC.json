@@ -1,5 +1,6 @@
 {
   "name": "OKAC - Kuwait (2607)",
+  "id": "a5af5261-bcc1-4e16-ad9a-43140189fc43",
   "updateUrl": "https://raw.githubusercontent.com/Kuwait-Iraq-vACC/kwiq-vATIS-Profiles/refs/heads/main/OKAC/OKAC.json",
   "updateSerial": 2026072201,
   "stations": [
@@ -1955,7 +1956,7 @@
           }
         }
       },
-      "notamsBeforeFreeText": false,
+      "notamsBeforeFreeText": true,
       "airportConditionsBeforeFreeText": false,
       "frequency": 126225000,
       "idsEndpoint": "",
@@ -1972,7 +1973,7 @@
           "name": "33L DEP | 34 ARR",
           "airportConditions": "",
           "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARR RWY34 @DEP RWY33L EXP INSTRUMENT APPROACH ILS DME [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\n[NOTAMS]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARR RWY34 @DEP RWY33L EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -1989,7 +1990,7 @@
           "name": "15R DEP | 16 ARR",
           "airportConditions": "",
           "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARR RWY16 @DEP RWY15R EXP INSTRUMENT APPROACH ILS DME [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\n[NOTAMS]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARR RWY16 @DEP RWY15R EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2006,7 +2007,7 @@
           "name": "33L/34 | DUAL RWY CONFIG",
           "airportConditions": "",
           "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY34 RWY33L EXP INSTRUMENT APPROACH ILS DME [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\n[NOTAMS]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY34 RWY33L EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2021,8 +2022,9 @@
           "id": "c306ecaf-3425-4e98-9f3a-310980ad8fff",
           "ordinal": 4,
           "name": "15R/16 | DUAL RWY CONFIG",
+          "airportConditions": "",
           "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY16 RWY15R EXP INSTRUMENT APPROACH ILS DME [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\n[NOTAMS]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY16 RWY15R EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2054,7 +2056,8 @@
           "id": "4debb69e-c7b9-4d3a-80e7-6d911f7e0ebe",
           "ordinal": 6,
           "name": "33L | SRO",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY33L EXP INSTRUMENT APPROACH\r\nILS DME SRO. ALL TRAFFIC MAY EXPECT DELAY\r\n[ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\n[NOTAMS]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "notams": "SRO ( SINGLE RWY OPERATION ) 33L",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY33L EXP INSTRUMENT APPROACH\r\nILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2165,9 +2168,9 @@
       ],
       "airportConditionDefinitions": [
         {
-          "text": "V 4 OUT OF SERVICE",
+          "text": "RSCD RWY33L BA999",
           "ordinal": 1,
-          "enabled": true
+          "enabled": false
         }
       ],
       "notamDefinitions": [
@@ -2190,6 +2193,11 @@
           "text": "RWY33R RWY15L CLSD",
           "ordinal": 4,
           "enabled": false
+        },
+        {
+          "text": "V 4 OUT OF SERVICE.",
+          "ordinal": 5,
+          "enabled": true
         }
       ]
     },
