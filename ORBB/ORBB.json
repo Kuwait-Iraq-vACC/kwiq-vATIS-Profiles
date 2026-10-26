@@ -53,7 +53,7 @@
           "variableDirection": {
             "template": {
               "text": "[WIND]: {wind_vmin}V{wind_vmax}",
-              "voice": "WIND VARIABLE {wind_vmin} AND {wind_vmax}"
+              "voice": "WIND VARIABLE BETWEEN {wind_vmin} AND {wind_vmax}"
             }
           },
           "calm": {
@@ -1925,7 +1925,9 @@
           "becomingVoice": "Becoming",
           "temporaryText": "TEMPO",
           "temporaryVoice": "Temporary",
-          "template": {}
+          "template": {},
+          "templateText": "{Trend}",
+          "templateVoice": "TREND, {Trend}"
         },
         "windShear": {
           "runwayText": "WS R{Runway}",
@@ -1986,7 +1988,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 1
         },
         {
           "id": "098f2d6e-3694-4c0d-b99e-384c03510a60",
@@ -2002,7 +2005,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 2
         },
         {
           "id": "8b65efb2-66c7-4a9d-ab3a-01b2d6240357",
@@ -2017,7 +2021,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 3
         },
         {
           "id": "77020cee-79b7-4503-8a6a-6dc58ffb9e4b",
@@ -2033,7 +2038,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 4
         }
       ],
       "contractions": [
@@ -2093,9 +2099,22 @@
           "text": ". START APPROVAL REQ WITHOUT EXCEPTION. WHEN READY FOR PUSH BACK AND OR START CONTACT PLANNER ON 121.700",
           "ordinal": 1,
           "enabled": false
+        },
+        {
+          "text": "LOW VISIBILITY PROCEDURES IN OPERATION",
+          "ordinal": 90,
+          "weatherCondition": "rvr < 550m OR visibility < 800m OR ceiling < 200ft",
+          "enabled": true
         }
       ],
-      "notamDefinitions": []
+      "notamDefinitions": [],
+      "patterns": [
+        {
+          "pattern": "\\bRWY ?(\\d{2}[LRC]?)\\b",
+          "text": "$0",
+          "voice": "RUNWAY $runway($1)"
+        }
+      ]
     },
     {
       "id": "07dc0626-e4b1-4f88-862c-1a03f9dce67f",
@@ -4019,7 +4038,9 @@
           "becomingVoice": "Becoming",
           "temporaryText": "TEMPO",
           "temporaryVoice": "Temporary",
-          "template": {}
+          "template": {},
+          "templateText": "{Trend}",
+          "templateVoice": "TREND, {Trend}"
         },
         "windShear": {
           "runwayText": "WS R{Runway}",
@@ -4080,7 +4101,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 1
         },
         {
           "id": "65118ccf-68d5-4f74-a002-70fb6b356855",
@@ -4096,7 +4118,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 2
         },
         {
           "id": "5b4a26f0-6c0f-48f7-b7a4-f3dbb4d314d3",
@@ -4112,7 +4135,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 3
         }
       ],
       "contractions": [
@@ -4177,8 +4201,22 @@
           "voice": "QUEUE ENN AITCH"
         }
       ],
-      "airportConditionDefinitions": [],
-      "notamDefinitions": []
+      "airportConditionDefinitions": [
+        {
+          "text": "LOW VISIBILITY PROCEDURES IN OPERATION",
+          "ordinal": 90,
+          "weatherCondition": "rvr < 550m OR visibility < 800m OR ceiling < 200ft",
+          "enabled": true
+        }
+      ],
+      "notamDefinitions": [],
+      "patterns": [
+        {
+          "pattern": "\\bRWY ?(\\d{2}[LRC]?)\\b",
+          "text": "$0",
+          "voice": "RUNWAY $runway($1)"
+        }
+      ]
     },
     {
       "id": "d50cc3e9-499b-48e5-9113-3be7784f413b",
@@ -6102,7 +6140,9 @@
           "becomingVoice": "Becoming",
           "temporaryText": "TEMPO",
           "temporaryVoice": "Temporary",
-          "template": {}
+          "template": {},
+          "templateText": "{Trend}",
+          "templateVoice": "TREND, {Trend}"
         },
         "windShear": {
           "runwayText": "WS R{Runway}",
@@ -6163,7 +6203,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 1
         },
         {
           "id": "683b4653-8eb4-4bcc-8523-b30bc24621a2",
@@ -6179,7 +6220,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 2
         }
       ],
       "contractions": [
@@ -6229,8 +6271,22 @@
           "voice": "QUEUE ENN AITCH"
         }
       ],
-      "airportConditionDefinitions": [],
-      "notamDefinitions": []
+      "airportConditionDefinitions": [
+        {
+          "text": "LOW VISIBILITY PROCEDURES IN OPERATION",
+          "ordinal": 90,
+          "weatherCondition": "rvr < 550m OR visibility < 800m OR ceiling < 200ft",
+          "enabled": true
+        }
+      ],
+      "notamDefinitions": [],
+      "patterns": [
+        {
+          "pattern": "\\bRWY ?(\\d{2}[LRC]?)\\b",
+          "text": "$0",
+          "voice": "RUNWAY $runway($1)"
+        }
+      ]
     },
     {
       "id": "5c87731e-a0a0-4878-a7b8-bb0d6a0e60ca",
@@ -8154,7 +8210,9 @@
           "becomingVoice": "Becoming",
           "temporaryText": "TEMPO",
           "temporaryVoice": "Temporary",
-          "template": {}
+          "template": {},
+          "templateText": "{Trend}",
+          "templateVoice": "TREND, {Trend}"
         },
         "windShear": {
           "runwayText": "WS R{Runway}",
@@ -8215,7 +8273,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 1
         },
         {
           "id": "eddcc411-262c-4719-8724-8a10ea7f9c92",
@@ -8231,7 +8290,8 @@
             "departure": "",
             "approaches": "",
             "remarks": ""
-          }
+          },
+          "ordinal": 2
         }
       ],
       "contractions": [
@@ -8296,8 +8356,22 @@
           "voice": "QUEUE ENN AITCH"
         }
       ],
-      "airportConditionDefinitions": [],
-      "notamDefinitions": []
+      "airportConditionDefinitions": [
+        {
+          "text": "LOW VISIBILITY PROCEDURES IN OPERATION",
+          "ordinal": 90,
+          "weatherCondition": "rvr < 550m OR visibility < 800m OR ceiling < 200ft",
+          "enabled": true
+        }
+      ],
+      "notamDefinitions": [],
+      "patterns": [
+        {
+          "pattern": "\\bRWY ?(\\d{2}[LRC]?)\\b",
+          "text": "$0",
+          "voice": "RUNWAY $runway($1)"
+        }
+      ]
     }
   ],
   "version": 4

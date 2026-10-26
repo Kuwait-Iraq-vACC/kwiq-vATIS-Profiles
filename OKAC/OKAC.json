@@ -18,7 +18,7 @@
         "observationTime": {
           "template": {
             "text": "{hour}{minute}Z",
-            "voice": "{hour} {minute} ZULU {special}."
+            "voice": "TIME {hour} {minute} ZULU {special}"
           }
         },
         "surfaceWind": {
@@ -29,38 +29,38 @@
           },
           "standard": {
             "template": {
-              "text": "{wind_dir}/{wind_spd}KT",
-              "voice": "{wind_dir} AT {wind_spd}."
+              "text": "WIND {wind_dir}/{wind_spd:#}KT",
+              "voice": "WIND {wind_dir} DEGREES {wind_spd} KNOTS"
             }
           },
           "standardGust": {
             "template": {
-              "text": "{wind_dir}/{wind_spd}G{wind_gust}KT",
-              "voice": "WIND {wind_dir} AT {wind_spd} GUSTS {wind_gust}"
+              "text": "WIND {wind_dir}/{wind_spd:#}G{wind_gust:#}KT",
+              "voice": "WIND {wind_dir} DEGREES {wind_spd} KNOTS GUSTING {wind_gust} KNOTS"
             }
           },
           "variable": {
             "template": {
-              "text": "VRB/{wind_spd}KT",
-              "voice": "WIND VARIABLE AT {wind_spd}"
+              "text": "WIND VRB/{wind_spd:#}KT",
+              "voice": "WIND VARIABLE {wind_spd} KNOTS"
             }
           },
           "variableGust": {
             "template": {
-              "text": "VRB/{wind_spd}G{wind_gust}KT",
-              "voice": "WIND VARIABLE AT {wind_spd} GUSTS {wind_gust}"
+              "text": "WIND VRB/{wind_spd:#}G{wind_gust:#}KT",
+              "voice": "WIND VARIABLE {wind_spd} KNOTS GUSTING {wind_gust} KNOTS"
             }
           },
           "variableDirection": {
             "template": {
               "text": "{wind_vmin}V{wind_vmax}",
-              "voice": "WIND VARIABLE BETWEEN {wind_vmin} AND {wind_vmax}"
+              "voice": "VARYING BETWEEN {wind_vmin} AND {wind_vmax} DEGREES"
             }
           },
           "calm": {
             "calmWindSpeed": 2,
             "template": {
-              "text": "{wind}",
+              "text": "WIND CALM",
               "voice": "WIND CALM"
             }
           }
@@ -74,14 +74,16 @@
           "southWest": "to the south-west",
           "west": "to the west",
           "northWest": "to the north-west",
-          "unlimitedVisibilityVoice": "visibility 10 kilometers or more",
-          "unlimitedVisibilityText": "ABV 10KM",
+          "unlimitedVisibilityVoice": "VISIBILITY 10 KILOMETERS OR MORE",
+          "unlimitedVisibilityText": "VIS 10KM",
           "includeVisibilitySuffix": true,
           "metersCutoff": 5000,
           "template": {
-            "text": "{visibility}",
+            "text": "VIS {visibility}",
             "voice": "VISIBILITY {visibility}"
-          }
+          },
+          "cavokText": "CAVOK",
+          "cavokVoice": "CAV-OK"
         },
         "runwayVisualRange": {
           "neutralTendency": "Neutral",
@@ -1898,35 +1900,37 @@
         },
         "temperature": {
           "usePlusPrefix": false,
-          "speakLeadingZero": true,
+          "speakLeadingZero": false,
           "template": {
-            "text": "{temp}",
-            "voice": " {temp}"
+            "text": "T{temp:#}",
+            "voice": "TEMPERATURE {temp}"
           }
         },
         "dewpoint": {
           "usePlusPrefix": false,
-          "speakLeadingZero": true,
+          "speakLeadingZero": false,
           "template": {
-            "text": "{dewpoint}",
-            "voice": " {dewpoint}"
+            "text": "DP{dewpoint:#}",
+            "voice": "DEW POINT {dewpoint}"
           }
         },
         "altimeter": {
           "pronounceDecimal": false,
           "template": {
-            "text": "{altimeter|hpa}",
-            "voice": "{altimeter|hpa} "
+            "text": "QNH {altimeter|hpa}HPA",
+            "voice": "QNH {altimeter|hpa} HECTOPASCALS"
           }
         },
         "trend": {
           "nosigText": "NOSIG",
-          "nosigVoice": "No Significant Changes",
+          "nosigVoice": "NO SIGNIFICANT CHANGE",
           "becomingText": "BECMG",
           "becomingVoice": "Becoming",
           "temporaryText": "TEMPO",
           "temporaryVoice": "Temporary",
-          "template": {}
+          "template": {},
+          "templateText": "{Trend}",
+          "templateVoice": "TREND, {Trend}"
         },
         "windShear": {
           "runwayText": "WS R{Runway}",
@@ -1952,7 +1956,7 @@
           "autoIncludeClosingStatement": false,
           "template": {
             "text": "CONFIRM ATIS {letter}",
-            "voice": "CONFIRM ATIS {letter|word}"
+            "voice": "CONFIRM ATIS INFORMATION {letter|word} ON INITIAL CONTACT"
           }
         }
       },
@@ -1970,10 +1974,10 @@
         {
           "id": "e4adfa89-a0cf-4eac-b7f9-fd0d24d40016",
           "ordinal": 1,
-          "name": "33L DEP | 34 ARR",
+          "name": "34 ARR | 33L DEP",
           "airportConditions": "",
           "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARR RWY34 @DEP RWY33L EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARR RWY34 DEP RWY33L [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -1987,44 +1991,10 @@
         {
           "id": "a63066be-20bb-4646-b373-a3e90e530e4c",
           "ordinal": 2,
-          "name": "15R DEP | 16 ARR",
+          "name": "16 ARR | 15R DEP",
           "airportConditions": "",
           "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARR RWY16 @DEP RWY15R EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
-          "externalGenerator": {
-            "enabled": false,
-            "textUrl": "",
-            "voiceUrl": "",
-            "arrival": "",
-            "departure": "",
-            "approaches": "",
-            "remarks": ""
-          }
-        },
-        {
-          "id": "105a4b77-ebd6-45e6-829d-451349e66bfb",
-          "ordinal": 3,
-          "name": "33L/34 | DUAL RWY CONFIG",
-          "airportConditions": "",
-          "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY34 RWY33L EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
-          "externalGenerator": {
-            "enabled": false,
-            "textUrl": "",
-            "voiceUrl": "",
-            "arrival": "",
-            "departure": "",
-            "approaches": "",
-            "remarks": ""
-          }
-        },
-        {
-          "id": "c306ecaf-3425-4e98-9f3a-310980ad8fff",
-          "ordinal": 4,
-          "name": "15R/16 | DUAL RWY CONFIG",
-          "airportConditions": "",
-          "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY16 RWY15R EXP INSTRUMENT APPROACH ILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARR RWY16 DEP RWY15R [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2037,27 +2007,11 @@
         },
         {
           "id": "79040b52-19d6-47c2-9bbb-f0177f0df9f6",
-          "ordinal": 5,
+          "ordinal": 3,
           "name": "34 | SRO",
           "airportConditions": "",
           "notams": "",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY34 EXP INSTRUMENT APPROACH\r\nILS DME SRO. ALL TRAFFIC MAY EXPECT DELAY\r\n[ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\n[NOTAMS]\r\nCONFIRM ATIS [ATIS_CODE]",
-          "externalGenerator": {
-            "enabled": false,
-            "textUrl": "",
-            "voiceUrl": "",
-            "arrival": "",
-            "departure": "",
-            "approaches": "",
-            "remarks": ""
-          }
-        },
-        {
-          "id": "4debb69e-c7b9-4d3a-80e7-6d911f7e0ebe",
-          "ordinal": 6,
-          "name": "33L | SRO",
-          "notams": "SRO ( SINGLE RWY OPERATION ) 33L",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY33L EXP INSTRUMENT APPROACH\r\nILS DME [NOTAMS] [ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARRDEP RWY34 SRO [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2070,9 +2024,28 @@
         },
         {
           "id": "c9aa8843-c6a9-4b2a-9e70-e4366d0dceda",
-          "ordinal": 6,
+          "ordinal": 4,
           "name": "16 | SRO",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[TIME] @ARRDEP RWY16 EXP INSTRUMENT APPROACH\nILS DME SRO. ALL TRAFFIC MAY EXPECT DELAY\n[ARPT_COND] TRL FL150\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\n[TREND]\n[NOTAMS]\nCONFIRM ATIS [ATIS_CODE]",
+          "airportConditions": "",
+          "notams": "",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARRDEP RWY16 SRO [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
+          "externalGenerator": {
+            "enabled": false,
+            "textUrl": "",
+            "voiceUrl": "",
+            "arrival": "",
+            "departure": "",
+            "approaches": "",
+            "remarks": ""
+          }
+        },
+        {
+          "id": "4debb69e-c7b9-4d3a-80e7-6d911f7e0ebe",
+          "ordinal": 5,
+          "name": "33L | SRO",
+          "airportConditions": "",
+          "notams": "",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARRDEP RWY33L SRO [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2085,9 +2058,45 @@
         },
         {
           "id": "330808ca-d07e-4d57-a1c7-15ad33b37805",
-          "ordinal": 8,
+          "ordinal": 6,
           "name": "15R | SRO",
-          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\r\n[TIME] @ARRDEP RWY15R EXP INSTRUMENT APPROACH\r\nILS DME SRO. ALL TRAFFIC MAY EXPECT DELAY\r\n[ARPT_COND] TRL FL150\r\nMET DATA DATES FROM [TIME] WIND [SURFACE_WIND] [WS] [VIS] [CLOUDS] [PRESENT_WX] [RECENT_WX] T[TEMP] DP[DEW] QNH [PRESSURE]HPA\r\n[TREND]\r\n[NOTAMS]\r\nCONFIRM ATIS [ATIS_CODE]",
+          "airportConditions": "",
+          "notams": "",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARRDEP RWY15R SRO [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
+          "externalGenerator": {
+            "enabled": false,
+            "textUrl": "",
+            "voiceUrl": "",
+            "arrival": "",
+            "departure": "",
+            "approaches": "",
+            "remarks": ""
+          }
+        },
+        {
+          "id": "105a4b77-ebd6-45e6-829d-451349e66bfb",
+          "ordinal": 7,
+          "name": "34/33L | DUAL ARRDEP",
+          "airportConditions": "",
+          "notams": "",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARRDEP RWY34 RWY33L [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
+          "externalGenerator": {
+            "enabled": false,
+            "textUrl": "",
+            "voiceUrl": "",
+            "arrival": "",
+            "departure": "",
+            "approaches": "",
+            "remarks": ""
+          }
+        },
+        {
+          "id": "c306ecaf-3425-4e98-9f3a-310980ad8fff",
+          "ordinal": 8,
+          "name": "16/15R | DUAL ARRDEP",
+          "airportConditions": "",
+          "notams": "",
+          "template": "[FACILITY] ARR ATIS [ATIS_CODE]\n[OBS_TIME] ARRDEP RWY16 RWY15R [ARPT_COND] [NOTAMS] TRL FL150\n[WIND] [VIS] [RVR] [PRESENT_WX] [CLOUDS] [TEMP] [DEW] [PRESSURE] [RECENT_WX] [WS] [RWY_COND]\n[TREND]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -2111,44 +2120,14 @@
           "voice": ". DEPARTURE"
         },
         {
-          "variableName": "E3",
-          "text": "E3",
-          "voice": "ECHO-THREE"
+          "variableName": "ARRDEP",
+          "text": "ARRDEP",
+          "voice": "ARRIVAL AND DEPARTURE"
         },
         {
-          "variableName": "TWYS",
-          "text": "TWYS",
-          "voice": "TAXIWAYS"
-        },
-        {
-          "variableName": "HPA",
-          "text": "HPA",
-          "voice": "HECK-TOE-PASCALS."
-        },
-        {
-          "variableName": "E4",
-          "text": "E4",
-          "voice": "ECHO-FOUR"
-        },
-        {
-          "variableName": "E5",
-          "text": "E5",
-          "voice": "ECHO-FIVE"
-        },
-        {
-          "variableName": "T",
-          "text": "T",
-          "voice": "TEMPERATURE"
-        },
-        {
-          "variableName": "DP",
-          "text": "DP",
-          "voice": "DEW-POINT"
-        },
-        {
-          "variableName": "FL150",
-          "text": "FL150",
-          "voice": "FLIGHT LEVEL ONE-FIVE-ZERO."
+          "variableName": "SRO",
+          "text": "SRO",
+          "voice": ". SINGLE RUNWAY OPERATIONS"
         },
         {
           "variableName": "TRL",
@@ -2156,48 +2135,131 @@
           "voice": ". TRANSITION LEVEL"
         },
         {
-          "variableName": "ARRDEP",
-          "text": "ARRDEP",
-          "voice": "ARRIVAL AND DEPARTURE"
+          "variableName": "FL150",
+          "text": "FL150",
+          "voice": "FLIGHT LEVEL ONE FIVE ZERO."
+        },
+        {
+          "variableName": "GND",
+          "text": "GND",
+          "voice": "GROUND"
+        },
+        {
+          "variableName": "TWR",
+          "text": "TWR",
+          "voice": "TOWER"
+        },
+        {
+          "variableName": "FREQ",
+          "text": "FREQ",
+          "voice": "FREQUENCY"
+        },
+        {
+          "variableName": "CLSD",
+          "text": "CLSD",
+          "voice": "CLOSED"
+        },
+        {
+          "variableName": "TWYS",
+          "text": "TWYS",
+          "voice": "TAXIWAYS"
+        },
+        {
+          "variableName": "V4",
+          "text": "V4",
+          "voice": "VICTOR FOUR"
+        },
+        {
+          "variableName": "E3",
+          "text": "E3",
+          "voice": "ECHO THREE"
+        },
+        {
+          "variableName": "E4",
+          "text": "E4",
+          "voice": "ECHO FOUR"
+        },
+        {
+          "variableName": "E5",
+          "text": "E5",
+          "voice": "ECHO FIVE"
         },
         {
           "variableName": "RSCD",
           "text": "RSCD",
           "voice": ". RUNWAY SURFACE CONDITIONS"
+        },
+        {
+          "variableName": "ADVS",
+          "text": "ADVS",
+          "voice": "ADVISE"
         }
       ],
       "airportConditionDefinitions": [
         {
-          "text": "RSCD RWY33L BA999",
+          "text": "ATC CLEARANCE WITH GND 121.7",
           "ordinal": 1,
-          "enabled": false
-        }
-      ],
-      "notamDefinitions": [
-        {
-          "text": "INCREASED SEPARATION MINIMA IN USE DURING SINGLE RUNWAY OPERATIONS",
-          "ordinal": 1,
-          "enabled": false
+          "onlineCondition": "OKKK_E_GND NOT OKKK_*DEL",
+          "enabled": true
         },
         {
-          "text": "ADVS IF UNABLE RWY34 ON INITIAL CONTACT",
+          "text": "ATC CLEARANCE WITH TWR FREQ 118.3",
           "ordinal": 2,
-          "enabled": false
+          "onlineCondition": "OKKK_TWR NOT (OKKK_*DEL OR OKKK_*GND)",
+          "enabled": true
         },
         {
-          "text": "ADVS IF UNABLE RWY16 ON INITIAL CONTACT",
+          "text": "RSCD RWY33L BA999",
           "ordinal": 3,
           "enabled": false
         },
         {
+          "text": "LOW VISIBILITY PROCEDURES IN OPERATION",
+          "ordinal": 90,
+          "weatherCondition": "rvr < 550m OR visibility < 800m OR ceiling < 200ft",
+          "enabled": true
+        }
+      ],
+      "notamDefinitions": [
+        {
+          "text": "V4 CLOSED DUE TO MAINTENANCE",
+          "ordinal": 1,
+          "enabled": false
+        },
+        {
+          "text": "RWY 33L/15R CLOSED FROM 1700 UTC UNTIL 0100 UTC. AS PUBLISHED",
+          "ordinal": 2,
+          "onlineCondition": "1700z-0100z",
+          "enabled": false
+        },
+        {
           "text": "RWY33R RWY15L CLSD",
+          "ordinal": 3,
+          "enabled": false
+        },
+        {
+          "text": "INCREASED SEPARATION MINIMA IN USE DURING SINGLE RUNWAY OPERATIONS",
           "ordinal": 4,
           "enabled": false
         },
         {
-          "text": "V 4 OUT OF SERVICE.",
+          "text": "ADVS IF UNABLE RWY34 ON INITIAL CONTACT",
           "ordinal": 5,
           "enabled": false
+        },
+        {
+          "text": "ADVS IF UNABLE RWY16 ON INITIAL CONTACT",
+          "ordinal": 6,
+          "enabled": false
+        }
+      ],
+      "airportConditionsSeparator": ". ",
+      "notamsSeparator": ". ",
+      "patterns": [
+        {
+          "pattern": "\\bRWY ?(\\d{2}[LRC]?)\\b",
+          "text": "$0",
+          "voice": "RUNWAY $runway($1)"
         }
       ]
     },
@@ -2227,7 +2289,7 @@
           "standard": {
             "template": {
               "text": "{wind_dir}{wind_spd}KT",
-              "voice": "{wind_dir} AT {wind_spd}"
+              "voice": "WIND {wind_dir} AT {wind_spd}"
             }
           },
           "standardGust": {
@@ -4068,8 +4130,8 @@
         "altimeter": {
           "pronounceDecimal": false,
           "template": {
-            "text": "A{altimeter} ({altimeter|text})",
-            "voice": "ALTIMETER {altimeter}"
+            "text": "QNH {altimeter|hpa}",
+            "voice": "QNH {altimeter|hpa}"
           }
         },
         "trend": {
@@ -4079,7 +4141,9 @@
           "becomingVoice": "Becoming",
           "temporaryText": "TEMPO",
           "temporaryVoice": "Temporary",
-          "template": {}
+          "template": {},
+          "templateText": "{Trend}",
+          "templateVoice": "TREND, {Trend}"
         },
         "windShear": {
           "runwayText": "WS R{Runway}",
@@ -4121,11 +4185,11 @@
       "presets": [
         {
           "id": "40628b00-4887-450e-92e2-ebdc08109ef8",
-          "ordinal": 0,
+          "ordinal": 1,
           "name": "30L | ILS APP",
           "airportConditions": "",
           "notams": "",
-          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\r\nARRDEP RWY30L\r\nEXPECT ILS APP\r\n[ARPT_COND]\r\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\r\n[TREND]\r\n[NOTAMS]\r\n[CLOSING]",
+          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\nARRDEP RWY30L\nEXPECT ILS APP\n[ARPT_COND]\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\n[TREND]\n[NOTAMS]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -4138,9 +4202,9 @@
         },
         {
           "id": "79eb8539-a464-4457-86c6-da5eefdcc825",
-          "ordinal": 1,
+          "ordinal": 2,
           "name": "30L | RNAV APP",
-          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\r\nARRDEP RWY30L\r\nEXPECT RNAV APP\r\n[ARPT_COND]\r\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\r\n[TREND]\r\n[NOTAMS]\r\n[CLOSING]",
+          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\nARRDEP RWY30L\nEXPECT RNAV APP\n[ARPT_COND]\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\n[TREND]\n[NOTAMS]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -4153,9 +4217,9 @@
         },
         {
           "id": "8156e4fe-7173-4b2b-b452-bb74b25ba4f7",
-          "ordinal": 2,
+          "ordinal": 3,
           "name": "12R | ILS APP",
-          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\r\nARRDEP RWY12R\r\nEXPECT ILS APP\r\n[ARPT_COND]\r\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\r\n[TREND]\r\n[NOTAMS]\r\n[CLOSING]",
+          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\nARRDEP RWY12R\nEXPECT ILS APP\n[ARPT_COND]\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\n[TREND]\n[NOTAMS]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -4168,9 +4232,9 @@
         },
         {
           "id": "3d5fefb1-e824-4bdc-9323-e131267b6395",
-          "ordinal": 3,
+          "ordinal": 4,
           "name": "12R | RNAV APP",
-          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\r\nARRDEP RWY12R\r\nEXPECT RNAV APP\r\n[ARPT_COND]\r\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\r\n[TREND]\r\n[NOTAMS]\r\n[CLOSING]",
+          "template": "OKAS ATIS INFO [ATIS_CODE] [TIME].\nARRDEP RWY12R\nEXPECT RNAV APP\n[ARPT_COND]\nMET DATA [TIME] [SURFACE_WIND] [VIS] [CLOUDS] [TEMP]/[DEW] [PRESSURE]\n[TREND]\n[NOTAMS]\n[CLOSING]",
           "externalGenerator": {
             "enabled": false,
             "textUrl": "",
@@ -4204,8 +4268,22 @@
           "voice": "APP."
         }
       ],
-      "airportConditionDefinitions": [],
-      "notamDefinitions": []
+      "airportConditionDefinitions": [
+        {
+          "text": "LOW VISIBILITY PROCEDURES IN OPERATION",
+          "ordinal": 90,
+          "weatherCondition": "rvr < 550m OR visibility < 800m OR ceiling < 200ft",
+          "enabled": true
+        }
+      ],
+      "notamDefinitions": [],
+      "patterns": [
+        {
+          "pattern": "\\bRWY ?(\\d{2}[LRC]?)\\b",
+          "text": "$0",
+          "voice": "RUNWAY $runway($1)"
+        }
+      ]
     }
   ],
   "version": 4
