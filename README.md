@@ -45,7 +45,7 @@ Iraq has no real-world D-ATIS, so ORBI, ORER, ORMM and ORNI follow the ICAO Doc 
 ORBI ATIS INFO K 0300Z
 EXPECT ILS APCH RWY33R OR RNP APCH RWY33L
 DEP RWY33R OR RWY33L
-TRL FL150
+TRL FL160
 WIND 140/12KT
 VIS 4000M DU
 CLD SCT 4000 BKN 10000 CB
@@ -57,7 +57,9 @@ CONFIRM ATIS K
 
 Airport conditions and NOTAMs go on their own lines after the transition level.
 
-### Automatic messages
+The transition level follows AIP Iraq ENR 1.7: TA 14 000 ft, **TL FL160, or FL170 when QNH is below 980 hPa**, for the whole Baghdad FIR.
+
+## OKKK automatic messages
 
 These messages switch on and off by themselves. Leave them ticked.
 
