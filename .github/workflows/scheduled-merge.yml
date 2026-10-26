@@ -1,0 +1,82 @@
+name: Scheduled Merge
+
+# Merges open pull requests whose description contains a line like
+#   Merge after: 2026-10-28T23:59Z
+# once that time (UTC) has passed, then bumps updateSerial so vATIS installs the update.
+# Merges made with GITHUB_TOKEN don't trigger the Update JSON Serial workflow, so the bump happens here.
+
+on:
+  schedule:
+    - cron: '59 23 * * *'
+    - cron: '30 0 * * *'  # catch-up in case the 2359Z run is dropped
+  workflow_dispatch:
+
+concurrency:
+  group: Scheduled-Merge
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    name: Merge due pull requests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Merge due pull requests
+        id: merge
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          before=$(git rev-parse HEAD)
+          now=$(date -u +%s)
+          merged=""
+
+          gh pr list --state open --limit 100 --json number,body \
+            --jq '.[] | [.number, (try (.body | capture("Merge after: *(?<t>[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2})Z").t) catch "")] | @tsv' \
+            > due.tsv
+
+          while IFS=$'\t' read -r number when; do
+            [ -z "$when" ] && continue
+            due=$(date -u -d "${when/T/ } UTC" +%s)
+            if [ "$now" -ge "$due" ]; then
+              echo "Merging #$number (due ${when}Z)"
+              gh pr merge "$number" --squash --delete-branch
+              merged="$merged #$number"
+            else
+              echo "Skipping #$number (due ${when}Z)"
+            fi
+          done < due.tsv
+          rm -f due.tsv
+
+          echo "before=$before" >> "$GITHUB_OUTPUT"
+          echo "merged=$merged" >> "$GITHUB_OUTPUT"
+
+      - name: Bump updateSerial
+        if: steps.merge.outputs.merged != ''
+        run: |
+          git pull --quiet origin main
+          git diff --name-only ${{ steps.merge.outputs.before }} HEAD > changed_files.txt
+          python .github/workflows/update-serial.py --changed-files-list changed_files.txt
+          rm changed_files.txt
+
+          git config user.name  'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No serial changes."
+          else
+            git commit -m "Update profiles | Scheduled merge${{ steps.merge.outputs.merged }}"
+            git push origin HEAD:main
+          fi
