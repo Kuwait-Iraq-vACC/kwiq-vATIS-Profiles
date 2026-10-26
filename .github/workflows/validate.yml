@@ -1,0 +1,30 @@
+name: Validate Profiles
+
+on:
+  pull_request:
+    paths:
+      - '**.json'
+      - '.github/scripts/**'
+  push:
+    branches:
+      - main
+    paths:
+      - '**.json'
+      - '.github/scripts/**'
+
+jobs:
+  validate:
+    name: Validate Profiles
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate profiles
+        run: python .github/scripts/validate.py
