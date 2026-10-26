@@ -37,6 +37,26 @@ CONFIRM ATIS B
 
 The OKKK presets are built to produce exactly this from the same METAR. The one known difference: visibility below 9999 is shown as METAR digits (`VIS 8000`) where the real D-ATIS writes `VIS 8KM`, because vATIS has no option for that.
 
+## ORBB uses a standard ICAO layout
+
+Iraq has no real-world D-ATIS, so ORBI, ORER, ORMM and ORNI follow the ICAO Doc 4444 (6.5) element order, written in the same style as the real Saudi (OERK, OEJN, OEDF) and Kuwait D-ATIS:
+
+```
+ORBI ATIS INFO K 0300Z
+EXPECT ILS APCH RWY33R OR RNP APCH RWY33L
+DEP RWY33R OR RWY33L
+TRL FL150
+WIND 140/12KT
+VIS 4000M DU
+CLD SCT 4000 BKN 10000 CB
+T22 DP09
+QNH 1004HPA
+TEMPO 3000 TSRA
+CONFIRM ATIS K
+```
+
+Airport conditions and NOTAMs go on their own lines after the transition level.
+
 ### Automatic messages
 
 These messages switch on and off by themselves. Leave them ticked.
