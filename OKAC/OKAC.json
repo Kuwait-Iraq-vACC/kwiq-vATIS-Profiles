@@ -2199,7 +2199,7 @@
         {
           "text": "ATC CLEARANCE WITH GND 121.7",
           "ordinal": 1,
-          "onlineCondition": "OKKK_*GND NOT OKKK_*DEL",
+          "onlineCondition": "OKKK_E_GND NOT OKKK_*DEL",
           "enabled": true
         },
         {
