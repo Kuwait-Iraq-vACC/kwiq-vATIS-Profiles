@@ -1,15 +1,15 @@
 """
-Bumps the "serial" field in any changed .json file.
+Bumps the "updateSerial" field in any changed .json file.
 
 Reads a newline-separated list of changed file paths (relative to repo root)
 and, for each one that:
   - still exists (i.e. wasn't deleted)
   - ends in .json
-  - parses as a JSON object containing an integer "serial" key
-increments that "serial" value by 1 and rewrites the file in place,
+  - parses as a JSON object containing an integer "updateSerial" key
+bumps it to the next YYYYMMDDNN serial and rewrites the file in place,
 preserving key order and using 2-space indentation.
 
-Files without a top-level "serial" key are left untouched.
+Files without a top-level "updateSerial" key are left untouched.
 
 Uses only the Python standard library - no external dependencies required.
 """
