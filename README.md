@@ -65,7 +65,7 @@ These messages switch on and off by themselves. Leave them ticked.
 
 | Message | Shown when |
 |-|-|
-| `ATC CLEARANCE WITH GND 121.7` | GMC-E (`OKKK_1_GND`, renamed `OKKK_E_GND` from AIRAC 2611) is online and Delivery is not. GMC-E issues clearances when DEL is offline, even if GMC-W is open |
+| `ATC CLEARANCE WITH GND 121.7` | GMC-E (`OKKK_E_GND`) is online and Delivery is not. GMC-E issues clearances when DEL is offline, even if GMC-W is open |
 | `ATC CLEARANCE WITH TWR FREQ 118.3` | Tower is online and neither Delivery nor Ground is |
 | `LOW VISIBILITY PROCEDURES IN OPERATION` | RVR < 550 m, visibility < 800 m or ceiling < 200 ft (all stations) |
 
