@@ -18,10 +18,10 @@ vATIS profiles for the Kuwait & Iraq vACC. They update automatically: import a p
 |-|-|-|-|-|
 | OKAC | OKKK | Kuwait International | 126.225 | 34 ARR / 33L DEP, 16 ARR / 15R DEP, SRO 34 / 16 / 33L / 15R, dual 34/33L, dual 16/15R |
 | OKAC | OKAS | Ali Al Salem | 133.000 | 30L / 12R, ILS or RNAV |
-| ORBB | ORBI | Baghdad International | 126.925 | Modes A–D |
-| ORBB | ORER | Erbil International | 130.400 | 36, 18, LVP 18 |
+| ORBB | ORBI | Baghdad International | 126.925 | Modes A–F |
+| ORBB | ORER | Erbil International | 130.400 | Mode A (18), Mode B (36), Mode A LVP |
 | ORBB | ORMM | Basra International | 124.525 | 32, 14 |
-| ORBB | ORNI | Al Najaf International | 123.900 | Modes A–B |
+| ORBB | ORNI | Al Najaf International | 123.900 | Modes A–D |
 
 ## OKKK matches the real D-ATIS
 
@@ -37,7 +37,29 @@ CONFIRM ATIS B
 
 The OKKK presets are built to produce exactly this from the same METAR. The one known difference: visibility below 9999 is shown as METAR digits (`VIS 8000`) where the real D-ATIS writes `VIS 8KM`, because vATIS has no option for that.
 
-### Automatic messages
+## ORBB uses a standard ICAO layout
+
+Iraq has no real-world D-ATIS, so ORBI, ORER, ORMM and ORNI follow the ICAO Doc 4444 (6.5) element order, written in the same style as the real Saudi (OERK, OEJN, OEDF) and Kuwait D-ATIS:
+
+```
+ORBI ATIS INFO K 0300Z
+EXPECT ILS APCH RWY33R OR RNP APCH RWY33L
+DEP RWY33R OR RWY33L
+TRL FL160
+WIND 140/12KT
+VIS 4000M DU
+CLD SCT 4000 BKN 10000 CB
+T22 DP09
+QNH 1004HPA
+TEMPO 3000 TSRA
+CONFIRM ATIS K
+```
+
+Airport conditions and NOTAMs go on their own lines after the transition level. Preset names follow the runway modes in the vACC SOPs, so the mode a controller selects is the mode they name on the ATIS.
+
+The transition level follows AIP Iraq ENR 1.7: TA 14 000 ft, **TL FL160, or FL170 when QNH is below 980 hPa**, for the whole Baghdad FIR.
+
+## OKKK automatic messages
 
 These messages switch on and off by themselves. Leave them ticked.
 
