@@ -2,7 +2,7 @@
   "name": "OKAC - Kuwait (2611)",
   "id": "a5af5261-bcc1-4e16-ad9a-43140189fc43",
   "updateUrl": "https://raw.githubusercontent.com/Kuwait-Iraq-vACC/kwiq-vATIS-Profiles/refs/heads/main/OKAC/OKAC.json",
-  "updateSerial": 2026102601,
+  "updateSerial": 2026102602,
   "stations": [
     {
       "id": "1db1877a-a954-43a1-9dbd-bff5d092eb12",
@@ -2199,7 +2199,7 @@
         {
           "text": "ATC CLEARANCE WITH GND 121.7",
           "ordinal": 1,
-          "onlineCondition": "OKKK_E_GND NOT OKKK_*DEL",
+          "onlineCondition": "OKKK_1_GND NOT OKKK_*DEL",
           "enabled": true
         },
         {
