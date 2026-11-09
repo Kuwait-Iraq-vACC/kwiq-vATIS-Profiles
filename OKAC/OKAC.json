@@ -2199,13 +2199,13 @@
         {
           "text": "ATC CLEARANCE WITH GND 121.7",
           "ordinal": 1,
-          "onlineCondition": "OKKK_E_GND NOT OKKK_*DEL",
+          "onlineCondition": "OKKK_E*_GND NOT OKKK*_DEL",
           "enabled": true
         },
         {
           "text": "ATC CLEARANCE WITH TWR FREQ 118.3",
           "ordinal": 2,
-          "onlineCondition": "OKKK_TWR NOT (OKKK_*DEL OR OKKK_*GND)",
+          "onlineCondition": "OKKK*_TWR NOT (OKKK*_DEL OR OKKK*_GND)",
           "enabled": true
         },
         {
